@@ -5,7 +5,7 @@ new Vue({
   // Esta seccion de VUE sirve para declarar Variables
   // Y constantes.
   data:{
-  	mensaje:'HOLA MUNDO CRUEL',
+  	mensaje:'HOLA MUNDO CRUEL again',
   	alumno:'',
   	edad:0,
    mascotas:[{nombre:'Goldi',especie:'Canina',edad:9},
