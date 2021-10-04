@@ -51,9 +51,24 @@ new Vue({
      this.especie='';
      this.edad=''; 
    },
+
+   eliminarMascota:function(pos){
+      var pregunta=confirm('Esta seguro de eliminar?');
+
+      if (pregunta)
+         // console.log('Voy a eliminar el: ' + pos);
+         this.mascotas.splice(pos,1);
+      // else
+      //    console.log('Se arrepintío');
+   },
+
+   editarMascota:function(pos){
+      this.nombre=this.mascotas[pos].nombre;
+      this.especie=this.mascotas[pos].especie;
+      this.edad=this.mascotas[pos].edad;
+
+   }
    
-
-
   }
   // FIN DE METHODS
 
