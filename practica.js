@@ -10,6 +10,8 @@ new Vue({
    nombre:'',
    especie:'',
   	edad:0,
+   editando:0,
+   indice:0,
    mascotas:[{nombre:'Goldi',especie:'Canina',edad:9},
              {nombre:'Zuma',especie:'Felina',edad:4},
              {nombre:'Toño',especie:'Canina',edad:5}
@@ -44,6 +46,18 @@ new Vue({
       // Agrego un objeto mascota
       this.mascotas.push(unaMascota);
       this.limpiarHtml();
+
+      //enviamos el foco al primer componente al html/nombre de la mascota, se debe agregar a todas las interfaces
+      this.$refs.nombre.focus();
+
+      //aca agregamos el mensaje de exito
+      Swal.fire({
+         position: 'center',
+         icon: 'success',
+         title: 'Se ha guardado exitosamente',
+         showConfirmButton: false,
+         timer: 2000
+       })
    },
 
    limpiarHtml:function(){
@@ -53,19 +67,43 @@ new Vue({
    },
 
    eliminarMascota:function(pos){
-      var pregunta=confirm('Esta seguro de eliminar?');
+      var pregunta=confirm('¿Esta seguro que desea eliminar?');
+      if(pregunta)
+        //console.Log('voy a eliminar: ' + pos);
+      this.mascotas.splice(pos,1);
+      //else
+        //console.Log('se arrepintio: ' + pos);
+   },
 
-      if (pregunta)
-         // console.log('Voy a eliminar el: ' + pos);
-         this.mascotas.splice(pos,1);
-      // else
-      //    console.log('Se arrepintío');
+
+   editarMascota:function(pos){
+      this.nombre=this.mascotas[pos].nombre;
+      this.especie=this.mascotas[pos].especie;
+      this.edad=this.mascotas[pos].edad;
+      this.editando=1;
+      this.indice=pos;
+   },
+   
+   cancelar:function(){
+      this.limpiarHtml();
+      this.editando=0;
+   },
+   //modifico los valores del array de objetos
+   guardarEdicion:function(){
+      this.mascotas[this.indice].nombre=this.nombre;
+      this.mascotas[this.indice].especie=this.especie;
+      this.mascotas[this.indice].edad=this.edad;
+   //limpiamos los componentes html e indicamos que terminamos de editar, activando el boton agregar/azul
+      this.limpiarHtml();
+      this.editando=0;
    },
 
    editarMascota:function(pos){
       this.nombre=this.mascotas[pos].nombre;
       this.especie=this.mascotas[pos].especie;
       this.edad=this.mascotas[pos].edad;
+      this.editando=1;
+      this.indice=pos;
 
    }
    
