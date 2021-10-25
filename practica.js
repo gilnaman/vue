@@ -10,8 +10,9 @@ new Vue({
    nombre:'',
    especie:'',
   	edad:0,
-   editando:0,
+   editando:0, 
    indice:0,
+   buscar:'',
    mascotas:[{nombre:'Goldi',especie:'Canina',edad:9},
              {nombre:'Zuma',especie:'Felina',edad:4},
              {nombre:'Toño',especie:'Canina',edad:5}
@@ -40,9 +41,11 @@ new Vue({
    },
 
    agregarMascota:function(){
+
+      if(this.nombre && this.especie && this.edad){
       // Construimos un objeto de tipo mascota para insertar en el array
       var unaMascota={nombre:this.nombre,especie:this.especie,edad:this.edad};
-
+            
       // Agrego un objeto mascota
       this.mascotas.push(unaMascota);
       this.limpiarHtml();
@@ -58,7 +61,16 @@ new Vue({
          showConfirmButton: false,
          timer: 2000
        })
-   },
+   }
+   else{
+      Swal.fire({
+         position: 'top end',
+         icon:'error',
+         title: 'Debe capturar todo los datos',
+         showConfirmButton: false,
+         timer: 2000
+      });
+   }},
 
    limpiarHtml:function(){
      this.nombre='';
@@ -107,7 +119,23 @@ new Vue({
 
    }
    
-  }
+  },
   // FIN DE METHODS
+
+  //Seccion para calcular valor automaticamente
+  computed:{
+   numeroMascotas:function(){
+      var num=0;
+      num=this.mascotas.length;
+      return num;
+   },
+   filtroMascota:function(){
+      return this.mascotas.filter((mascota)=>{
+         return mascota.nombre.toLowerCase().match(this.buscar.toLowerCase().trim()) || 
+               mascota.especie.toLowerCase().match(this.buscar.toLowerCase().trim())
+      });
+   }         
+  }
+
 
 });

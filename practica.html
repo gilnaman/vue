@@ -72,9 +72,15 @@
 		<div class="col-md-4">
 			<button class="btn btn-info" @click="cancelar()">Cancelar</button>
 		</div>
-
+		
 		</div>
-
+		<br>
+		<div class="row">
+			<div class="col-md-6">
+				<input type="text" placeholder="Escriba el nombre o especie de la mascota " v-model="buscar" class="form-control">
+			</div>
+		</div>
+		<br>
 		<table class="table table-borderd">
 			<thead>
 				<th>INDICE</th>
@@ -85,7 +91,7 @@
 			</thead>
 
 			<tbody>
-				<tr v-for="(masc,index) in mascotas">
+				<tr v-for="(masc,index) in filtroMascota">
 					<td>{{index}}</td>
 					<td>{{masc.nombre}}</td>
 					<td>{{masc.especie}}</td>
@@ -106,6 +112,11 @@
 			</tbody>
 			
 		</table>
+		<div class="row">
+			<div class="col-md-8">
+				<h3>Temenos: {{numeroMascotas}} Mascotas</h3>
+			</div>
+		</div>
 		<br><br>
 
 
@@ -118,7 +129,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 
 	<script type="text/javascript" src="practica.js"></script>
-	<script type="text/javascript" src="sweetalert2.all.min.js"></script>
+	<script type="text/javascript" src="sweetalert2.all.min.js"></script>	
 
 </body>
 </html>
